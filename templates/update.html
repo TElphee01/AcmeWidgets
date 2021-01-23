@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Job Hazard Analysis - Acme Widgets</title>
+{% endblock %}
+
+
+{% block body %} 
+    <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis web applicaiton</h2>
+{% endblock %}
+
+
+{% block body1 %} 
+<h4 class="page-section-heading text-center text-white">Empty box</h4>
+    <div class="container">
+        <h1>Update Task</h1>
+     
+        <div class="form">  
+            <form action="/update/{{task.id}}" method="POST">
+                <input type="text" name="content" id="content" value="{{task.content}}">
+                <input type="submit" value="Update">
+            </form>
+        </div>  
+    </div>
+{% endblock %}

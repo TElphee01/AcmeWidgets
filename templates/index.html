@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Job Hazard Analysis - Acme Widgets</title>
+{% endblock %}
+
+
+{% block body %} 
+    <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis Form</h2>
+{% endblock %}
+
+
+{% block body1 %} 
+    <div class="container">
+        <h1>Task Master</h1>
+            {% if tasks|length < 1 %}
+                <h4>No tasks. Please create one. </h4>
+            {% else %}
+        <table>
+            <tr>
+                <td>Task</td>
+                <td>Added</td>
+                <td>Actions</td>
+            </tr>
+                {% for task in tasks %}
+            <tr>
+                <td></td> {{ task.content }}
+                <td></td> {{ task.date_created.date() }}
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
+{% endblock %}
