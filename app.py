@@ -21,7 +21,7 @@ def home():
         return render_template('home.html')
 
 @app.route('/newHazard')#Creates route to new hazard page (index.html)
-def newHazard()
+def newHazard():
         return render_template('index.html')    
 
 @app.route('/', methods=['POST', 'GET'])
