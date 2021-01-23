@@ -6,38 +6,49 @@
 
 
 {% block body %} 
-    <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis Form</h2>
+    <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis Form </h2>
 {% endblock %}
 
 
 {% block body1 %} 
-    <div class="container">
-        <h1>Task Master</h1>
-            {% if tasks|length < 1 %}
-                <h4>No tasks. Please create one. </h4>
+    <div class="container-fluid">
+        <h1>Job hazards</h1>
+            {% if jha|length < 1 %}
+                <h4>No Job Hazards. Please create one. </h4>
             {% else %}
         <table>
             <tr>
-                <td>Task</td>
-                <td>Added</td>
-                <td>Actions</td>
+
+                <td>Author </td>
+                <td>Date created </td>
+                <td>Activity Description</td>
+                <td>Hazard Description</td>
+                <td>Hazard Control</td>
             </tr>
-                {% for task in tasks %}
+                {% for jha in jha %}
             <tr>
-                <td></td> {{ task.content }}
-                <td></td> {{ task.date_created.date() }}
+                <td>{{ jha.author }}</td>
+                <td>{{ jha.date_created.date() }}</td>
+                <td>{{ jha.activityDescription }}</td>
+                <td>{{ jha.hazardDescription }}</td>
+                <td>{{ jha.hazardControl }}</td>
                 <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
+                    <a href="/delete/{{jha.JHAid}}">Delete</a>
                     <br>
-                    <a href="/update/{{task.id}}">Update</a>
+                    <a href="/update/{{Jha.JHA_to_update}}">Update</a> 
                 </td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
-        <form action="/" method="POST">
-            <input type="text" name="content" id="content">
-            <input type="submit" value="Add Task">
+        <form action="/postJHA" method="POST">
+            <input type="text" name="author" id="author">
+            <input type="text" name="dateCreated" id="date">
+            <input type="text" name="activityDescription" id="activity">
+            <input type="text" name="hazardDescription" id="hazard">
+            <input type="text" name="hazardControl" id="control">
+
+            <input type="submit" value="Add Job hazard">
         </form>
     </div>
 {% endblock %}

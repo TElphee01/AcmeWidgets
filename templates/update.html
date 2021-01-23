@@ -13,11 +13,11 @@
 {% block body1 %} 
 <h4 class="page-section-heading text-center text-white">Empty box</h4>
     <div class="container">
-        <h1>Update Task</h1>
+        <h1>Update Job Hazard Analysis form</h1>
      
         <div class="form">  
-            <form action="/update/{{task.id}}" method="POST">
-                <input type="text" name="content" id="content" value="{{task.content}}">
+            <form action="/update/{{jha.JHA_to_update}}" method="POST">
+                <input type="text" name="author" id="author" value="{{jha.author}}">
                 <input type="submit" value="Update">
             </form>
         </div>  
