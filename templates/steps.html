@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Job Hazard Analysis - Acme Widgets</title>
+{% endblock %}
+
+{% block body %} 
+    <h2 class="page-section-heading text-center text-uppercase text-white">Exisiting Job Hazard Analysis </h2>
+{% endblock %}
+
+{% block body1 %} 
+    <div class="container-fluid">
+        <h1>Job hazards</h1>
+        <form action="/steps/{{steps.JHAid}}" method="POST">
+            <div class="form-group">
+                <label for="stepDescription">Step Description</label>
+                <input type="text" class="form-control" name="stepDescription1" id="stepDescription1">
+            </div>
+            <input type="submit" value="Add Step" class="btn btn-primary">
+        </form>
+
+
+        {% if step|length < 1 %}
+                <h4>No Steps to show for this hazard </h4>
+        {% else %}
+            <table class ="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Step No.</th>
+                    <th scope="col">Description </th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                {% for step in step %}
+                <tr>
+                    <td>{{ step.Stepid }}</td>
+                    <td>{{ step.stepDescription }}</td>
+                    <td>
+                        <a href="/">Return</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

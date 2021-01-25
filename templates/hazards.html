@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Job Hazard Analysis - Acme Widgets</title>
+{% endblock %}
+
+{% block body %} 
+    <h2 class="page-section-heading text-center text-uppercase text-white">Exisiting Job Hazard Analysis </h2>
+{% endblock %}
+
+{% block body1 %} 
+    <div class="container-fluid wrapper bg-light">
+        <h1 class="text-dark">Job hazards</h1>
+        {% if jha|length < 1 %}
+                <h4>No Job Hazards. Please select New Hazard </h4>
+        {% else %}
+            <table class ="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Author </th>
+                    <th scope="col">Date created </th>
+                    <th scope="col">Activity Description</th>
+                    <th scope="col">Hazard Description</th>
+                    <th scope="col">Hazard Control</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                {% for jha in jha %}
+                <tr>
+                    <td>{{ jha.author }}</td>
+                    <td>{{ jha.date_created.date() }}</td>
+                    <td>{{ jha.activityDescription }}</td>
+                    <td>{{ jha.hazardDescription }}</td>
+                    <td>{{ jha.hazardControl }}</td>
+                    <td>
+                        <a href="/delete/{{jha.JHAid}}">Delete</a>
+                        <br>
+                        <a href="/update/{{jha.JHAid}}">Update</a>
+                        <br>
+                        <a href="/steps/{{jha.JHAid}}">Steps</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

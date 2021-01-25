@@ -11,14 +11,31 @@
 
 
 {% block body1 %} 
-<h4 class="page-section-heading text-center text-white">Empty box</h4>
     <div class="container">
         <h1>Update Job Hazard Analysis form</h1>
      
         <div class="form">  
-            <form action="/update/{{jha.JHA_to_update}}" method="POST">
-                <input type="text" name="author" id="author" value="{{jha.author}}">
-                <input type="submit" value="Update">
+            <form action="/update/{{jha.JHAid}}" method="POST">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" name="author" id="author" value="{{jha.author}}">
+                </div>
+                </div>
+                <div class="form-group">
+                    <label for="activityDescription">Activity Description</label>
+                    <input type="text" class="form-control" name="activityDescription" id="activityDescription" value="{{jha.activityDescription}}">
+                </div>
+                <div class="form-group">
+                    <label for="hazardDescription">Hazard Description</label>
+                    <input type="text" class="form-control" name="hazardDescription" id="hazardDescription" value="{{jha.hazardDescription}}">
+                </div>
+                <div class="form-group">
+                    <label for="hazardControl">Hazard Control</label>
+                    <input type="text" class="form-control" name="hazardControl" value="{{jha.hazardControl}}">
+                </div>
+                <input type="submit" value="Update" class="btn btn-primary">
             </form>
         </div>  
     </div>

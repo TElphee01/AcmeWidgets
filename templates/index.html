@@ -4,51 +4,33 @@
     <title>Job Hazard Analysis - Acme Widgets</title>
 {% endblock %}
 
-
 {% block body %} 
     <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis Form </h2>
 {% endblock %}
 
-
 {% block body1 %} 
     <div class="container-fluid">
         <h1>Job hazards</h1>
-            {% if jha|length < 1 %}
-                <h4>No Job Hazards. Please create one. </h4>
-            {% else %}
-        <table>
-            <tr>
-
-                <td>Author </td>
-                <td>Date created </td>
-                <td>Activity Description</td>
-                <td>Hazard Description</td>
-                <td>Hazard Control</td>
-            </tr>
-                {% for jha in jha %}
-            <tr>
-                <td>{{ jha.author }}</td>
-                <td>{{ jha.date_created.date() }}</td>
-                <td>{{ jha.activityDescription }}</td>
-                <td>{{ jha.hazardDescription }}</td>
-                <td>{{ jha.hazardControl }}</td>
-                <td>
-                    <a href="/delete/{{jha.JHAid}}">Delete</a>
-                    <br>
-                    <a href="/update/{{Jha.JHA_to_update}}">Update</a> 
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <form action="/postJHA" method="POST">
-            <input type="text" name="author" id="author">
-            <input type="text" name="dateCreated" id="date">
-            <input type="text" name="activityDescription" id="activity">
-            <input type="text" name="hazardDescription" id="hazard">
-            <input type="text" name="hazardControl" id="control">
-
-            <input type="submit" value="Add Job hazard">
+        <form action="/" method="POST">
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="authorName">Author Name</label>
+                <input type="text" class="form-control" name="author" id="author" placeholder="'John Doe'">
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="activityDescription">Activity Description</label>
+                <input type="text" class="form-control" name="activityDescription" id="activityDescription">
+            </div>
+            <div class="form-group">
+                <label for="hazardDescription">Hazard Description</label>
+                <input type="text" class="form-control" name="hazardDescription" id="hazardDescription">
+            </div>
+            <div class="form-group">
+                <label for="hazardControl">Hazard Control</label>
+                <input type="text" class="form-control" name="hazardControl" id="hazardControl">
+            </div>
+            <input type="submit" value="Add Job hazard" class="btn btn-primary">
         </form>
     </div>
 {% endblock %}
