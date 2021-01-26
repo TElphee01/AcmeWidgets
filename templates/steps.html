@@ -5,22 +5,22 @@
 {% endblock %}
 
 {% block body %} 
-    <h2 class="page-section-heading text-center text-uppercase text-white">Exisiting Job Hazard Analysis </h2>
+    <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis Steps </h2>
 {% endblock %}
 
 {% block body1 %} 
     <div class="container-fluid">
         <h1>Job hazards</h1>
-        <form action="/steps/{{steps.JHAid}}" method="POST">
+        <form action="/steps/{{step.JHAid}}" method="POST">
             <div class="form-group">
                 <label for="stepDescription">Step Description</label>
-                <input type="text" class="form-control" name="stepDescription1" id="stepDescription1">
+                <input type="text" class="form-control" name="stepDescription" id="stepDescription">
             </div>
             <input type="submit" value="Add Step" class="btn btn-primary">
         </form>
 
 
-        {% if step|length < 1 %}
+        {% if jha|length < 1 %}
                 <h4>No Steps to show for this hazard </h4>
         {% else %}
             <table class ="table">
@@ -31,7 +31,7 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                {% for step in step %}
+                {% for jha in jha %}
                 <tr>
                     <td>{{ step.Stepid }}</td>
                     <td>{{ step.stepDescription }}</td>

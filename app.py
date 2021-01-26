@@ -15,25 +15,22 @@ class Jha(db.Model): #replace nullable = false on last few fields
     activityDescription = db.Column(db.String(200))
     hazardDescription = db.Column(db.String(200))
     hazardControl = db.Column(db.String(200))
-    steps = db.relationship('Step', backref='jha', lazy=True)
+    steps = db.relationship('Step', backref='jha_step')
 
     def __repr__(self):
-        return f"Jha('{self.JHAid}','{self.author}','{self.activityDescription}','{self.hazardDescription}','{self.hazardControl}')"
+        return f"Jha('{self.JHAid}','{self.author}','{self.activityDescription}','{self.hazardDescription}','{self.hazardControl}','{self.steps})"
 
 class Step(db.Model):
     Stepid = db.Column(db.Integer, primary_key=True)
     stepDescription = db.Column(db.String(200), nullable=False)
-    JHAid_id = db.Column(db.Integer, db.ForeignKey('jha.JHAid'),
-        nullable=False)
+    JHA_step_id = db.Column(db.Integer, db.ForeignKey('jha.JHAid'))
+    
+    def __repr__(self):
+        return f"Step('{self.Stepid}','{self.stepDescription}','{self.jsa.JHAid}','{self.jha_step})"
 
 @app.route('/home')# creates route to home page
 def home():
     return render_template('home.html')
-
-@app.route('/toSteps', methods=['POST', 'GET'])# creates route to steps page
-def toSteps():
-    stepQuery = Step.query.order_by(Step.JHAid_id).all()
-    return render_template('steps.html', steps=stepQuery)
 
 @app.route('/hazardList', methods=['POST', 'GET'])# creates route to list of Hazards
 def hazardL():
@@ -91,22 +88,27 @@ def update(id):
     else:
         return render_template('update.html', jha=JHA_to_update)
 
-@app.route('/steps/<int:id>', methods=['GET', 'POST'])
+@app.route('/steps/<int:id>', methods=['POST', 'GET'])
 def steps(id):
+    stepQuery = Jha.query.get_or_404(id)
+    new_JHAid = Jha.query.all().filter(Jha.hazardControl == stepQuery)
+
     if request.method =='POST':
-        step_stepDescription = request.form['stepDescription']
-        stepInsert =Step(stepDescription=step_stepDescription)
-       
+        stepInsert = Step(stepDescription=request.form['stepDescription'], jha_step=new_JHAid)
         try:
             db.session.add(stepInsert)
             db.session.commit()
-            flash('Job Hazard Step inserted successfully!')
-            return redirect('/toSteps')
+            return redirect('/hazardList')
         except: # pylint: disable=bare-except
             return "error adding Job Hazard step"
     else:
-        stepQuery = Step.query.order_by(Step.JHAid_id).all()
-        return render_template('steps.html', steps=stepQuery)
+        stepQuery = Jha.query.get_or_404(id)
+        return render_template('steps.html', step=stepQuery)
+
+@app.route('/getSteps/<int:id>', methods=['POST', 'GET'])# creates route to steps page
+def getSteps(id):
+    stepQuery = Jha.query.get_or_404(id)
+    return render_template('steps.html', step=stepQuery)
 
 if __name__ =="__main__":
     app.run(debug=True)
