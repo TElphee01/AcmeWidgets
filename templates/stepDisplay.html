@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Job Hazard Analysis - Acme Widgets</title>
+{% endblock %}
+
+{% block body %} 
+    <h2 class="page-section-heading text-center text-uppercase text-white">Job Hazard Analysis Steps </h2>
+{% endblock %}
+
+{% block body1 %} 
+                <h4>No Steps to show for this hazard </h4>
+            <table class ="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Step No.</th>
+                    <th scope="col">Description </th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+               <tr>
+                    <td>{{ stepDisplay.stepDisplay }}</td>
+                    <td>{{ stepDisplay.stepDescription }}</td>
+                    <td>
+                        <a href="/hazardList">Return</a>
+                    </td>
+                </tr>
+            </table>
+{% endblock %}

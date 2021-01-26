@@ -18,29 +18,7 @@
             </div>
             <input type="submit" value="Add Step" class="btn btn-primary">
         </form>
-
-
-        {% if jha|length < 1 %}
-                <h4>No Steps to show for this hazard </h4>
-        {% else %}
-            <table class ="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Step No.</th>
-                    <th scope="col">Description </th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                {% for jha in jha %}
-                <tr>
-                    <td>{{ step.Stepid }}</td>
-                    <td>{{ step.stepDescription }}</td>
-                    <td>
-                        <a href="/">Return</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
+                                <br>
+                        <a href="/stepDisplay/{{step.JHAid}}">Show Steps</a>
     </div>
 {% endblock %}

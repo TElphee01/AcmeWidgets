@@ -26,7 +26,7 @@ class Step(db.Model):
     JHA_step_id = db.Column(db.Integer, db.ForeignKey('jha.JHAid'))
     
     def __repr__(self):
-        return f"Step('{self.Stepid}','{self.stepDescription}','{self.jsa.JHAid}','{self.jha_step})"
+        return f"Step('{self.Stepid}','{self.stepDescription}','{self.jha.JHAid}','{self.jha_step})"
 
 @app.route('/home')# creates route to home page
 def home():
@@ -90,11 +90,10 @@ def update(id):
 
 @app.route('/steps/<int:id>', methods=['POST', 'GET'])
 def steps(id):
-    stepQuery = Jha.query.get_or_404(id)
-    new_JHAid = Jha.query.all().filter(Jha.hazardControl == stepQuery)
+    step = Jha.query.get_or_404(id)
 
     if request.method =='POST':
-        stepInsert = Step(stepDescription=request.form['stepDescription'], jha_step=new_JHAid)
+        stepInsert = Step(stepDescription=request.form['stepDescription'], jha_step=step)
         try:
             db.session.add(stepInsert)
             db.session.commit()
@@ -102,13 +101,13 @@ def steps(id):
         except: # pylint: disable=bare-except
             return "error adding Job Hazard step"
     else:
-        stepQuery = Jha.query.get_or_404(id)
-        return render_template('steps.html', step=stepQuery)
+        step = Jha.query.get_or_404(id)
+        return render_template('steps.html', step=step)
 
-@app.route('/getSteps/<int:id>', methods=['POST', 'GET'])# creates route to steps page
-def getSteps(id):
-    stepQuery = Jha.query.get_or_404(id)
-    return render_template('steps.html', step=stepQuery)
+@app.route('/stepDisplay/<int:id>', methods=['POST', 'GET'])# creates route to steps page
+def stepDisplay1(id):
+    stepDisplay = Jha.query.get_or_404(id)
+    return render_template('stepDisplay.html', stepDisplay=stepDisplay)
 
 if __name__ =="__main__":
     app.run(debug=True)
