@@ -1,0 +1,2 @@
+These are the screenshots from my Job Hazard Analysis Demo web application. Project is roughly 75% complete. 
+Built using Python logic, Flask web app interface, SQLite Database and SQL Alchemy interaction.
