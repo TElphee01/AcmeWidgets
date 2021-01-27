@@ -106,7 +106,7 @@ def steps(id):
 
 @app.route('/stepDisplay/<int:id>', methods=['POST', 'GET'])# creates route to steps page
 def stepDisplay1(id):
-    stepDisplay = Jha.query.get_or_404(id)
+    stepDisplay = Step.query.all()
     return render_template('stepDisplay.html', stepDisplay=stepDisplay)
 
 if __name__ =="__main__":

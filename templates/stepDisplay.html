@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block body1 %} 
+        {% if stepDisplay|length < 1 %}
                 <h4>No Steps to show for this hazard </h4>
+            {% else %}
             <table class ="table">
                 <thead class="thead-dark">
                 <tr>
@@ -18,12 +20,15 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
-               <tr>
-                    <td>{{ stepDisplay.stepDisplay }}</td>
+                {% for stepDisplay in stepDisplay %}
+                <tr>
+                    <td>{{ stepDisplay.Stepid }}</td>
                     <td>{{ stepDisplay.stepDescription }}</td>
                     <td>
                         <a href="/hazardList">Return</a>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
+        {% endif %}
 {% endblock %}
