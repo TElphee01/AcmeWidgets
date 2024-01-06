@@ -1,5 +1,2 @@
 # AcmeWidgets_JHA-App
-Job Hazard Analysis App - Acme Widgets.
-
-Purpose:
-The job hazard analysis (JHA) program ensures occupational hazardsare identified and controls are established to protect workers for routine operations and activities.
+Acme Widgets - Job Hazard Analysis App (JHA) ensures occupational hazards are identified and controls are established to protect warehouse and production workers for routine operations and activities.
